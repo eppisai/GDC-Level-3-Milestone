@@ -62,7 +62,7 @@ class SimpleTest(unittest.TestCase):
         self.command_object.add(["10", "Task 10"])
         self.command_object.done(["10"])
         tasks = load_tasks_file()
-        self.assertFalse("10" in tasks)
+        self.assertFalse(10 in tasks)
         completed = load_completed_file()
         self.assertTrue("Task 10" in completed)
 
@@ -70,7 +70,7 @@ class SimpleTest(unittest.TestCase):
         self.command_object.add(["15", "Task 15"])
         self.command_object.delete(["15"])
         tasks = load_tasks_file()
-        self.assertFalse("15" in tasks)
+        self.assertFalse(15 in tasks)
         completed = load_completed_file()
         self.assertFalse("Task 15" in completed)
 
