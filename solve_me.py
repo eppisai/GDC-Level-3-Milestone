@@ -132,7 +132,6 @@ $ python tasks.py runserver # Starts the tasks management server"""
             i = i + 1
 
     def render_pending_tasks(self):
-        # Complete this method to return all incomplete tasks as HTML
         self.read_current()
         if len(self.current_items) == 0:
             return "<h1> There are no pending tasks! </h1>"
@@ -146,7 +145,6 @@ $ python tasks.py runserver # Starts the tasks management server"""
         return text
 
     def render_completed_tasks(self):
-        # Complete this method to return all completed tasks as HTML
         self.read_completed()
         if len(self.completed_items) == 0:
             return "<h1> There are no completed tasks! </h1>"
@@ -157,23 +155,6 @@ $ python tasks.py runserver # Starts the tasks management server"""
 
         text += "</ol> </h4>"
         return text
-
-
-class TasksServer(TasksCommand, BaseHTTPRequestHandler):
-    def do_GET(self):
-        task_command_object = TasksCommand()
-        if self.path == "/tasks":
-            content = task_command_object.render_pending_tasks()
-        elif self.path == "/completed":
-            content = task_command_object.render_completed_tasks()
-        else:
-            self.send_response(404)
-            self.end_headers()
-            return
-        self.send_response(200)
-        self.send_header("content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(content.encode())
 
 
 class TasksServer(TasksCommand, BaseHTTPRequestHandler):
